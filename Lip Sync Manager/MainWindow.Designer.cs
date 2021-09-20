@@ -58,6 +58,7 @@ namespace Lip_Sync_Manager
             this.step4Btn = new System.Windows.Forms.Button();
             this.step5Btn = new System.Windows.Forms.Button();
             this.step6Btn = new System.Windows.Forms.Button();
+            this.allStepsBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -321,11 +322,23 @@ namespace Lip_Sync_Manager
             this.step6Btn.UseVisualStyleBackColor = true;
             this.step6Btn.Click += new System.EventHandler(this.step6Btn_Click);
             // 
+            // allStepsBtn
+            // 
+            this.allStepsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.allStepsBtn.Location = new System.Drawing.Point(585, 439);
+            this.allStepsBtn.Name = "allStepsBtn";
+            this.allStepsBtn.Size = new System.Drawing.Size(203, 23);
+            this.allStepsBtn.TabIndex = 19;
+            this.allStepsBtn.Text = "Run All Steps";
+            this.allStepsBtn.UseVisualStyleBackColor = true;
+            this.allStepsBtn.Click += new System.EventHandler(this.allStepsBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 648);
+            this.Controls.Add(this.allStepsBtn);
             this.Controls.Add(this.step6Btn);
             this.Controls.Add(this.step5Btn);
             this.Controls.Add(this.step4Btn);
@@ -388,6 +401,7 @@ namespace Lip_Sync_Manager
         private System.Windows.Forms.Button step4Btn;
         private System.Windows.Forms.Button step5Btn;
         private System.Windows.Forms.Button step6Btn;
+        private System.Windows.Forms.Button allStepsBtn;
     }
 }
 

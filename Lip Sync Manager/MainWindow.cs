@@ -156,7 +156,60 @@ namespace Lip_Sync_Manager
             }
         }
 
+        async private void allStepsBtn_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you wish to run all steps?", "Notice", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            await RunStep1();
+            await RunStep2();
+            await RunStep3();
+            await RunStep4();
+            await RunStep5();
+            await RunStep6();
+
+            MessageBox.Show("All steps finished.");
+        }
+
         async private void step1Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep1();
+            MessageBox.Show("WAV files generated.");
+        }
+
+        async private void step2Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep2();
+            MessageBox.Show("Lip sync generated.");
+        }
+
+        async private void step3Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep3();
+            MessageBox.Show("WAV files silenced.");
+        }
+
+        async private void step4Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep4();
+            MessageBox.Show("WAV files converted to XWM.");
+        }
+
+        async private void step5Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep5();
+            MessageBox.Show("Combined files into FUZ.");
+        }
+
+        async private void step6Btn_Click(object sender, EventArgs e)
+        {
+            await RunStep6();
+            MessageBox.Show("Deleted XWM, LIP & WAV files.");
+        }
+
+        async private Task RunStep1()
         {
             step1Btn.Enabled = false;
             step1Btn.Text = "Generating...";
@@ -169,7 +222,7 @@ namespace Lip_Sync_Manager
                     {
                         synth.Rate = -3;
                         synth.Volume = 100;
-                        
+
                         synth.SetOutputToWaveFile(Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text + ".wav"),
                           new SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
                         synth.Speak(itm.SubItems[3].Text);
@@ -179,11 +232,9 @@ namespace Lip_Sync_Manager
 
             step1Btn.Text = "Step 1: Generate WAV Files";
             step1Btn.Enabled = true;
-
-            MessageBox.Show("WAV files generated.");
         }
 
-        async private void step2Btn_Click(object sender, EventArgs e)
+        async private Task RunStep2()
         {
             step2Btn.Enabled = false;
             step2Btn.Text = "Running Lip Gen...";
@@ -224,11 +275,9 @@ namespace Lip_Sync_Manager
 
             step2Btn.Text = "Step 2: Generate Lip Syncing";
             step2Btn.Enabled = true;
-
-            MessageBox.Show("Lip sync generated.");
         }
 
-        async private void step3Btn_Click(object sender, EventArgs e)
+        async private Task RunStep3()
         {
             step3Btn.Enabled = false;
             step3Btn.Text = "Silencing...";
@@ -249,7 +298,7 @@ namespace Lip_Sync_Manager
 
                     File.Delete(wavFile);
 
-                    using(WaveFileWriter wf = new WaveFileWriter(wavFile, wavFormat))
+                    using (WaveFileWriter wf = new WaveFileWriter(wavFile, wavFormat))
                     {
                         int bytesPerMillisecond = wavFormat.AverageBytesPerSecond / 1000;
                         var silentBytes = new byte[((int)wavDuration.TotalMilliseconds) * bytesPerMillisecond];
@@ -260,11 +309,9 @@ namespace Lip_Sync_Manager
 
             step3Btn.Text = "Step 3: Silence WAV Files";
             step3Btn.Enabled = true;
-
-            MessageBox.Show("WAV files silenced.");
         }
 
-        async private void step4Btn_Click(object sender, EventArgs e)
+        async private Task RunStep4()
         {
             step4Btn.Enabled = false;
             step4Btn.Text = "Converting...";
@@ -285,11 +332,9 @@ namespace Lip_Sync_Manager
 
             step4Btn.Text = "Step 4: Convert WAV Files to XWM";
             step4Btn.Enabled = true;
-
-            MessageBox.Show("WAV files converted to XWM.");
         }
 
-        async private void step5Btn_Click(object sender, EventArgs e)
+        async private Task RunStep5()
         {
             step5Btn.Enabled = false;
             step5Btn.Text = "Combining...";
@@ -310,11 +355,9 @@ namespace Lip_Sync_Manager
 
             step5Btn.Text = "Step 5: Combine Files into FUZ";
             step5Btn.Enabled = true;
-
-            MessageBox.Show("Combined files into FUZ.");
         }
 
-        async private void step6Btn_Click(object sender, EventArgs e)
+        async private Task RunStep6()
         {
             step6Btn.Enabled = false;
             step6Btn.Text = "Deleting...";
@@ -333,13 +376,6 @@ namespace Lip_Sync_Manager
 
             step6Btn.Text = "Step 6: Delete XWM, LIP && WAV";
             step6Btn.Enabled = true;
-
-            MessageBox.Show("Deleted XWM, LIP & WAV files.");
-        }
-
-        async private void RunStep1()
-        {
-
         }
     }
 
