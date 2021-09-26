@@ -25,7 +25,7 @@ namespace Lip_Sync_Manager
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            listView1.Items.Add(new ListViewItem(new[] { pluginnameBox.Text, voicetypeBox.Text, filenameBox.Text, dialogueBox.Text }));
+            listView1.Items.Add(new ListViewItem(new[] { filenameBox.Text, dialogueBox.Text }));
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,10 +33,8 @@ namespace Lip_Sync_Manager
             if(listView1.SelectedItems.Count > 0)
             {
                 var n = listView1.SelectedItems[0];
-                pluginnameBox.Text = n.SubItems[0].Text;
-                voicetypeBox.Text = n.SubItems[1].Text;
-                filenameBox.Text = n.SubItems[2].Text;
-                dialogueBox.Text = n.SubItems[3].Text;
+                filenameBox.Text = n.SubItems[0].Text;
+                dialogueBox.Text = n.SubItems[1].Text;
             }
         }
 
@@ -45,10 +43,8 @@ namespace Lip_Sync_Manager
             if (listView1.SelectedItems.Count > 0)
             {
                 var n = listView1.SelectedItems[0];
-                n.SubItems[0].Text = pluginnameBox.Text;
-                n.SubItems[1].Text = voicetypeBox.Text;
-                n.SubItems[2].Text = filenameBox.Text;
-                n.SubItems[3].Text = dialogueBox.Text;
+                n.SubItems[0].Text = filenameBox.Text;
+                n.SubItems[1].Text = dialogueBox.Text;
             }
         }
 
@@ -76,14 +72,19 @@ namespace Lip_Sync_Manager
             {
                 projList.Add(new VoiceLineEntry
                 {
-                    pluginName = itm.SubItems[0].Text,
-                    voiceType = itm.SubItems[1].Text,
-                    fileName = itm.SubItems[2].Text,
-                    dialogue = itm.SubItems[3].Text
+                    fileName = itm.SubItems[0].Text,
+                    dialogue = itm.SubItems[1].Text
                 });
             }
 
-            File.WriteAllText(saveDialog.FileName, JsonConvert.SerializeObject(projList));
+            var proj = new LSMProject
+            {
+                pluginName = pluginnameBox.Text,
+                voiceType = voicetypeBox.Text,
+                lines = projList
+            };
+
+            File.WriteAllText(saveDialog.FileName, JsonConvert.SerializeObject(proj));
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,13 +120,16 @@ namespace Lip_Sync_Manager
 
         private void loadProj(string filename)
         {
-            var projList = JsonConvert.DeserializeObject<List<VoiceLineEntry>>(File.ReadAllText(filename));
 
+            var proj = JsonConvert.DeserializeObject<LSMProject>(File.ReadAllText(filename));
+
+            pluginnameBox.Text = proj.pluginName;
+            voicetypeBox.Text = proj.voiceType;
             listView1.Items.Clear();
 
-            foreach (var line in projList)
+            foreach (var line in proj.lines)
             {
-                listView1.Items.Add(new ListViewItem(new[] { line.pluginName, line.voiceType, line.fileName, line.dialogue }));
+                listView1.Items.Add(new ListViewItem(new[] { line.fileName, line.dialogue }));
             }
         }
 
@@ -223,9 +227,9 @@ namespace Lip_Sync_Manager
                         synth.Rate = -3;
                         synth.Volume = 100;
 
-                        synth.SetOutputToWaveFile(Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text + ".wav"),
+                        synth.SetOutputToWaveFile(Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text, itm.SubItems[0].Text + ".wav"),
                           new SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
-                        synth.Speak(itm.SubItems[3].Text);
+                        synth.Speak(itm.SubItems[1].Text);
                     }
                 });
             }
@@ -239,10 +243,8 @@ namespace Lip_Sync_Manager
             step2Btn.Enabled = false;
             step2Btn.Text = "Running Lip Gen...";
 
-            ListViewItem item = listView1.Items[0];
-
             var lipGenStartInfo = new ProcessStartInfo(Path.Combine(Properties.Settings.Default.FO4Dir, "CreationKit32.exe"));
-            lipGenStartInfo.Arguments = $"-GenerateLIPS:{item.SubItems[0].Text}";
+            lipGenStartInfo.Arguments = $"-GenerateLIPS:{pluginnameBox.Text}";
             lipGenStartInfo.WorkingDirectory = Properties.Settings.Default.FO4Dir;
 
             var lipGenProcess = Process.Start(lipGenStartInfo);
@@ -257,7 +259,7 @@ namespace Lip_Sync_Manager
                     var fileDoesNotExist = false;
                     foreach (ListViewItem itm in listView1.Items)
                     {
-                        if (!File.Exists(Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text + ".lip")))
+                        if (!File.Exists(Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text, itm.SubItems[0].Text + ".lip")))
                         {
                             fileDoesNotExist = true;
                             break;
@@ -286,13 +288,13 @@ namespace Lip_Sync_Manager
             {
                 await Task.Run(() =>
                 {
-                    var wavFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text + ".wav");
+                    var wavFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text, itm.SubItems[0].Text + ".wav");
                     TimeSpan wavDuration;
                     WaveFormat wavFormat;
 
                     using (WaveFileReader wf = new WaveFileReader(wavFile))
                     {
-                        wavDuration = wf.TotalTime;
+                        wavDuration = wf.TotalTime - TimeSpan.FromSeconds(1);
                         wavFormat = wf.WaveFormat;
                     }
 
@@ -320,7 +322,7 @@ namespace Lip_Sync_Manager
             {
                 await Task.Run(() =>
                 {
-                    var soundFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text);
+                    var soundFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text, itm.SubItems[0].Text);
                     var xwmStartInfo = new ProcessStartInfo(Path.Combine(Properties.Settings.Default.FO4Dir, "Tools", "Audio", "xwmaencode.exe"));
                     xwmStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     xwmStartInfo.Arguments = $"-b 32000 \"{soundFile + ".wav"}\" \"{soundFile + ".xwm"}\"";
@@ -339,14 +341,12 @@ namespace Lip_Sync_Manager
             step5Btn.Enabled = false;
             step5Btn.Text = "Combining...";
 
-            ListViewItem itm = listView1.Items[0];
-
             await Task.Run(() =>
             {
-                var soundPath = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text);
+                var voicePath = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text);
                 var fuzerStartInfo = new ProcessStartInfo(Path.Combine(Properties.Settings.Default.FO4Dir, "Tools", "LipGen", "LipFuzer", "LIPFuzer.exe"));
                 fuzerStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                fuzerStartInfo.WorkingDirectory = soundPath;
+                fuzerStartInfo.WorkingDirectory = voicePath;
                 fuzerStartInfo.Arguments = "-a xwm";
 
                 var fuzerProcess = Process.Start(fuzerStartInfo);
@@ -366,7 +366,7 @@ namespace Lip_Sync_Manager
             {
                 await Task.Run(() =>
                 {
-                    var soundFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", itm.SubItems[0].Text, itm.SubItems[1].Text, itm.SubItems[2].Text);
+                    var soundFile = Path.Combine(Properties.Settings.Default.FO4Dir, "Data", "Sound", "Voice", pluginnameBox.Text, voicetypeBox.Text, itm.SubItems[0].Text);
 
                     File.Delete(soundFile + ".xwm");
                     File.Delete(soundFile + ".lip");
@@ -381,9 +381,14 @@ namespace Lip_Sync_Manager
 
     public class VoiceLineEntry
     {
-        public string pluginName = string.Empty;
-        public string voiceType = string.Empty;
         public string fileName = string.Empty;
         public string dialogue = string.Empty;
+    }
+
+    public class LSMProject
+    {
+        public string pluginName = string.Empty;
+        public string voiceType = string.Empty;
+        public List<VoiceLineEntry> lines = new List<VoiceLineEntry>();
     }
 }

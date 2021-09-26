@@ -40,8 +40,6 @@ namespace Lip_Sync_Manager
             this.step2Btn = new System.Windows.Forms.Button();
             this.step3Btn = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +57,9 @@ namespace Lip_Sync_Manager
             this.step5Btn = new System.Windows.Forms.Button();
             this.step6Btn = new System.Windows.Forms.Button();
             this.allStepsBtn = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -114,7 +114,7 @@ namespace Lip_Sync_Manager
             // step1Btn
             // 
             this.step1Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step1Btn.Location = new System.Drawing.Point(585, 468);
+            this.step1Btn.Location = new System.Drawing.Point(585, 552);
             this.step1Btn.Name = "step1Btn";
             this.step1Btn.Size = new System.Drawing.Size(203, 23);
             this.step1Btn.TabIndex = 1;
@@ -125,7 +125,7 @@ namespace Lip_Sync_Manager
             // step2Btn
             // 
             this.step2Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step2Btn.Location = new System.Drawing.Point(585, 497);
+            this.step2Btn.Location = new System.Drawing.Point(585, 581);
             this.step2Btn.Name = "step2Btn";
             this.step2Btn.Size = new System.Drawing.Size(203, 23);
             this.step2Btn.TabIndex = 2;
@@ -136,7 +136,7 @@ namespace Lip_Sync_Manager
             // step3Btn
             // 
             this.step3Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step3Btn.Location = new System.Drawing.Point(585, 526);
+            this.step3Btn.Location = new System.Drawing.Point(585, 610);
             this.step3Btn.Name = "step3Btn";
             this.step3Btn.Size = new System.Drawing.Size(203, 23);
             this.step3Btn.TabIndex = 3;
@@ -150,44 +150,33 @@ namespace Lip_Sync_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader2,
             this.columnHeader1,
             this.columnHeader3});
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 27);
+            this.listView1.Location = new System.Drawing.Point(12, 91);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(567, 609);
+            this.listView1.Size = new System.Drawing.Size(567, 629);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Plugin Name";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Voice Type";
-            this.columnHeader2.Width = 76;
-            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Filename";
-            this.columnHeader1.Width = 59;
+            this.columnHeader1.Width = 111;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Dialogue";
-            this.columnHeader3.Width = 367;
+            this.columnHeader3.Width = 443;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(582, 106);
+            this.label1.Location = new System.Drawing.Point(582, 91);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 5;
@@ -196,7 +185,7 @@ namespace Lip_Sync_Manager
             // filenameBox
             // 
             this.filenameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filenameBox.Location = new System.Drawing.Point(585, 122);
+            this.filenameBox.Location = new System.Drawing.Point(585, 107);
             this.filenameBox.Name = "filenameBox";
             this.filenameBox.Size = new System.Drawing.Size(203, 20);
             this.filenameBox.TabIndex = 6;
@@ -205,7 +194,7 @@ namespace Lip_Sync_Manager
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(582, 149);
+            this.label2.Location = new System.Drawing.Point(582, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 7;
@@ -214,7 +203,7 @@ namespace Lip_Sync_Manager
             // dialogueBox
             // 
             this.dialogueBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dialogueBox.Location = new System.Drawing.Point(585, 165);
+            this.dialogueBox.Location = new System.Drawing.Point(585, 150);
             this.dialogueBox.Multiline = true;
             this.dialogueBox.Name = "dialogueBox";
             this.dialogueBox.Size = new System.Drawing.Size(203, 151);
@@ -223,7 +212,7 @@ namespace Lip_Sync_Manager
             // addBtn
             // 
             this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addBtn.Location = new System.Drawing.Point(585, 322);
+            this.addBtn.Location = new System.Drawing.Point(585, 307);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(203, 23);
             this.addBtn.TabIndex = 9;
@@ -234,7 +223,7 @@ namespace Lip_Sync_Manager
             // updatedSelectedBtn
             // 
             this.updatedSelectedBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.updatedSelectedBtn.Location = new System.Drawing.Point(585, 351);
+            this.updatedSelectedBtn.Location = new System.Drawing.Point(585, 336);
             this.updatedSelectedBtn.Name = "updatedSelectedBtn";
             this.updatedSelectedBtn.Size = new System.Drawing.Size(203, 23);
             this.updatedSelectedBtn.TabIndex = 10;
@@ -244,17 +233,15 @@ namespace Lip_Sync_Manager
             // 
             // voicetypeBox
             // 
-            this.voicetypeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.voicetypeBox.Location = new System.Drawing.Point(585, 83);
+            this.voicetypeBox.Location = new System.Drawing.Point(361, 22);
             this.voicetypeBox.Name = "voicetypeBox";
             this.voicetypeBox.Size = new System.Drawing.Size(203, 20);
             this.voicetypeBox.TabIndex = 12;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 67);
+            this.label3.Location = new System.Drawing.Point(291, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 11;
@@ -262,17 +249,15 @@ namespace Lip_Sync_Manager
             // 
             // pluginnameBox
             // 
-            this.pluginnameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pluginnameBox.Location = new System.Drawing.Point(585, 43);
+            this.pluginnameBox.Location = new System.Drawing.Point(82, 22);
             this.pluginnameBox.Name = "pluginnameBox";
             this.pluginnameBox.Size = new System.Drawing.Size(203, 20);
             this.pluginnameBox.TabIndex = 14;
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(582, 27);
+            this.label4.Location = new System.Drawing.Point(6, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 13;
@@ -281,7 +266,7 @@ namespace Lip_Sync_Manager
             // removeBtn
             // 
             this.removeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeBtn.Location = new System.Drawing.Point(585, 380);
+            this.removeBtn.Location = new System.Drawing.Point(585, 365);
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(203, 23);
             this.removeBtn.TabIndex = 15;
@@ -292,7 +277,7 @@ namespace Lip_Sync_Manager
             // step4Btn
             // 
             this.step4Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step4Btn.Location = new System.Drawing.Point(585, 555);
+            this.step4Btn.Location = new System.Drawing.Point(585, 639);
             this.step4Btn.Name = "step4Btn";
             this.step4Btn.Size = new System.Drawing.Size(203, 23);
             this.step4Btn.TabIndex = 16;
@@ -303,7 +288,7 @@ namespace Lip_Sync_Manager
             // step5Btn
             // 
             this.step5Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step5Btn.Location = new System.Drawing.Point(585, 584);
+            this.step5Btn.Location = new System.Drawing.Point(585, 668);
             this.step5Btn.Name = "step5Btn";
             this.step5Btn.Size = new System.Drawing.Size(203, 23);
             this.step5Btn.TabIndex = 17;
@@ -314,7 +299,7 @@ namespace Lip_Sync_Manager
             // step6Btn
             // 
             this.step6Btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.step6Btn.Location = new System.Drawing.Point(585, 613);
+            this.step6Btn.Location = new System.Drawing.Point(585, 697);
             this.step6Btn.Name = "step6Btn";
             this.step6Btn.Size = new System.Drawing.Size(203, 23);
             this.step6Btn.TabIndex = 18;
@@ -325,7 +310,7 @@ namespace Lip_Sync_Manager
             // allStepsBtn
             // 
             this.allStepsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.allStepsBtn.Location = new System.Drawing.Point(585, 439);
+            this.allStepsBtn.Location = new System.Drawing.Point(585, 523);
             this.allStepsBtn.Name = "allStepsBtn";
             this.allStepsBtn.Size = new System.Drawing.Size(203, 23);
             this.allStepsBtn.TabIndex = 19;
@@ -333,20 +318,30 @@ namespace Lip_Sync_Manager
             this.allStepsBtn.UseVisualStyleBackColor = true;
             this.allStepsBtn.Click += new System.EventHandler(this.allStepsBtn_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.pluginnameBox);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.voicetypeBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(776, 57);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Project Settings";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 648);
+            this.ClientSize = new System.Drawing.Size(800, 732);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.allStepsBtn);
             this.Controls.Add(this.step6Btn);
             this.Controls.Add(this.step5Btn);
             this.Controls.Add(this.step4Btn);
             this.Controls.Add(this.removeBtn);
-            this.Controls.Add(this.pluginnameBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.voicetypeBox);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.updatedSelectedBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.dialogueBox);
@@ -366,6 +361,8 @@ namespace Lip_Sync_Manager
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,12 +385,10 @@ namespace Lip_Sync_Manager
         private System.Windows.Forms.TextBox dialogueBox;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button updatedSelectedBtn;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.TextBox voicetypeBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TextBox pluginnameBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button removeBtn;
@@ -402,6 +397,7 @@ namespace Lip_Sync_Manager
         private System.Windows.Forms.Button step5Btn;
         private System.Windows.Forms.Button step6Btn;
         private System.Windows.Forms.Button allStepsBtn;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
